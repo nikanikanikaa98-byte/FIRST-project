@@ -36,40 +36,50 @@ Client → Docker Container → Gunicorn → Flask Application
 Returns:
 
 ```text
-OK ```
+OK 
+```
+
 GET /health
 
 Returns:
 
 ```text
-{"status":"ok"}```
+{"status":"ok"}
+```
+
 Deployment Steps
 
 1. Clone repository
 ```text
 git clone https://github.com/nikanikanikaa98-byte/flask-aws-ec2-docker-deployment.git
-cd flask-aws-ec2-docker-deployment```
+cd flask-aws-ec2-docker-deployment
+```
 
 2. Create virtual environment
 ```text
 python3 -m venv venv
-source venv/bin/activate```
+source venv/bin/activate
+```
 
 3. Install dependencies
 ```text
-pip install -r requirements.txt```
+pip install -r requirements.txt
+```
 
 4. Run with Gunicorn
 ```text
 gunicorn --workers 3 --bind 127.0.0.1:5000 wsgi:app
 systemd Service 
 ```
+
 This project is configured to run with systemd on Ubuntu.
 
 ###Example service startup check:
 
 ```text
-sudo systemctl status myapp```
+sudo systemctl status myapp
+```
+
 Docker Support 
 
 This project can also be run inside a Docker container.
@@ -77,23 +87,28 @@ This project can also be run inside a Docker container.
 ###Build Docker image
 
 ```text
-docker build -t flask-docker-app .```
+docker build -t flask-docker-app .
+```
+
 ###Run Docker container
 
 ```text
-docker run -d -p 5001:5000 --name flask-container flask-docker-app```
+docker run -d -p 5001:5000 --name flask-container flask-docker-app
+```
 
 ###Test Docker container
 
 ```text
 curl http://127.0.0.1:5001/
-curl http://127.0.0.1:5001/health```
+curl http://127.0.0.1:5001/health
+```
 
 Expected responses:
 
 ```text
 / → OK
-/health → {"status":"ok"}```
+/health → {"status":"ok"}
+```
 
 ###Project Files
 app.py
