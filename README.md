@@ -119,16 +119,34 @@ This project can also be started with Docker Compose.
 docker compose up -d 
 ```
 
-##CI/CD pipeline is configured with GitHub Actions.
+## CI/CD
 
+This project includes a GitHub Actions CI/CD pipeline.
+
+### CI
+On every push to `main`, GitHub Actions:
+- installs dependencies
+- checks Flask app import
+- builds Docker image
+- starts the app with Docker Compose
+- tests the `/health` endpoint
+
+### CD
+After successful CI, GitHub Actions:
+- connects to the EC2 server over SSH
+- pulls the latest code from GitHub
+- installs dependencies
+- restarts the `myapp` systemd service
 ## Project Files
+
 - app.py
 - wsgi.py
 - requirements.txt
 - Dockerfile
 - .dockerignore
 - README.md
-
+- `.github/workflows/ci.yml` — CI pipeline with GitHub Actions
+- `.github/workflows/cd.yml` — CD pipeline for EC2 deployment
 ## What I Learned
 - How to deploy a Flask application on AWS EC2
 - How to configure Gunicorn as a production WSGI server
